@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Chrome-Firefox Suite" parallel="classes" thread-count="2">
+    <listeners>
+        <listener class-name="TestListener.class"/>
+    </listeners>
+    <test name="firefox-tests">
+        <parameter name="browserType" value="firefox"/>
+        <classes>
+            <class name="internal.rejon.tealiumdemo.Tests.TC01_RegisterTest"/>
+        </classes>
+    </test>
+    <test name="chrome-tests">
+        <parameter name="browserType" value="chrome"/>
+        <classes>
+            <class name="internal.rejon.tealiumdemo.Tests.TC01_RegisterTest"/>
+        </classes>
+    </test>
+</suite>
