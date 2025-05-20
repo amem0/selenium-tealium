@@ -24,43 +24,54 @@ public class RegisterPage extends BasePage {
         this.driver.get(this.baseUrl + this.subpath);
     }
 
-    public void inputFirstName(MockUserData UserData) {
-        this.type(firstNameLocator, UserData.firstName);
+    public RegisterPage inputFirstName(MockUserData userData) {
+        this.type(firstNameLocator, userData.firstName);
+        return this;
     }
 
-    public void inputMiddleName(MockUserData UserData) {
-        this.type(middleNameLocator, UserData.middleName);
+    public RegisterPage inputMiddleName(MockUserData userData) {
+        this.type(middleNameLocator, userData.middleName);
+        return this;
     }
 
-    public void inputLastName(MockUserData UserData) {
-        this.type(lastNameLocator, UserData.lastName);
+    public RegisterPage inputLastName(MockUserData userData) {
+        this.type(lastNameLocator, userData.lastName);
+        return this;
     }
 
-    public void inputEmailAddress(MockUserData UserData) {
-        this.type(emailAddressLocator, UserData.emailAddress);
+    public RegisterPage inputEmailAddress(MockUserData userData) {
+        this.type(emailAddressLocator, userData.emailAddress);
+        return this;
     }
 
-    public void inputPassword(MockUserData UserData) {
-        this.type(passwordLocator, UserData.password);
+    public RegisterPage inputPassword(MockUserData userData) {
+        this.type(passwordLocator, userData.password);
+        return this;
     }
 
-    public void inputConfirmPassword(MockUserData UserData) {
-        this.type(confirmPasswordLocator, UserData.password);
+    public RegisterPage inputConfirmPassword(MockUserData userData) {
+        this.type(confirmPasswordLocator, userData.password);
+        return this;
     }
 
-    public void inputSignUp4Newsletter(MockUserData UserData) {
-        if (UserData.signUp4Newsletter && !(this.isChecked(this.signUp4NewsletterLocator))) {
+    public RegisterPage inputSignUp4Newsletter(MockUserData userData) {
+        if (userData.signUp4Newsletter && !(this.isChecked(this.signUp4NewsletterLocator))) {
             this.click(signUp4NewsletterLocator);
         }
+        return this;
     }
 
-    public void inputRememberMe(MockUserData UserData) {
-        if (UserData.rememberMe && !(this.isChecked(this.rememberMeLocator))) {
+    public RegisterPage inputRememberMe(MockUserData userData) {
+        if (userData.rememberMe && !(this.isChecked(this.rememberMeLocator))) {
             this.click(rememberMeLocator);
         }
+        return this;
     }
 
-    public LoginPage goToLoginPage() {
+    /*
+     * Nuk ka nevoje per return LoginPage pasi do krijonte dy GET.
+     */
+    public void goToLoginPageBack() {
         this.click(interactionBackButton);
     }
 

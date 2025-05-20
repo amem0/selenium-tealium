@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import java.io.IOException;
+
 public class SeleniumDriver {
     public static WebDriver driver  = null;
     public static SeleniumDriver instance = new SeleniumDriver();
@@ -35,7 +37,11 @@ public class SeleniumDriver {
     }
 
     public static void setConsentCookie(){
-        driver.manage().addCookie(new Cookie("CONSENTMGR","consent:false%7Cts:1747603105255"));
+        try{
+            driver.manage().addCookie(new Cookie(PropertyParsing.getProperties().getProperty("privacyConsentCookieKey"),
+                    PropertyParsing.getProperties().getProperty("privacyConsentCookieValue")));
+        }
+        catch (IOException e) {}
     }
 
     public static void closeDriver(){

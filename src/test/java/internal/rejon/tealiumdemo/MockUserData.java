@@ -22,4 +22,9 @@ public class MockUserData {
         this.signUp4Newsletter = signUp4Newsletter;
         this.rememberMe = rememberMe;
     }
+    public String getFullNameUpper(){
+        return new StringBuilder(firstName.toUpperCase()).append(" ")
+                .append(middleName.toUpperCase()).append(" ")
+                .append(lastName.toUpperCase()).toString();
+    }
 }

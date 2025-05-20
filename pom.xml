@@ -23,10 +23,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>maven-central</id>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -40,6 +36,7 @@
             <groupId>com.aventstack</groupId>
             <artifactId>chaintest-testng</artifactId>
             <version>1.0.12</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>

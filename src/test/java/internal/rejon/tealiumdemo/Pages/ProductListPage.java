@@ -17,11 +17,15 @@ public class ProductListPage extends BasePage {
     public By productImageLocator = By.cssSelector("a.product-image > img");
     public By productInfoNameLocator = By.cssSelector("div.product-info h2.product-name");
     public By productPriceBoxLocator = By.cssSelector("div.product-info div.price-box");
+    public By productActionsLocator = By.cssSelector("div.product-info div.actions");
     public By productPricesLocator = By.cssSelector("div.product-info div.price-box p");
     public By productRegularPriceLocator = new ByChained(productPricesLocator, By.cssSelector("span.regular-price > span.price"));
     public By productOldPriceLocator = new ByChained(productPriceBoxLocator, By.cssSelector("p.old-price"));
     public By productSpecialPriceLocator = new ByChained(productPriceBoxLocator, By.cssSelector("p.special-price"));
     public By productPriceValueLocator = By.cssSelector("span.price");
+
+
+    public By productAddToWishlistLocator = new ByChained(productActionsLocator, By.cssSelector("li > a.link-wishlist"));
 
     /*
      * TC: 5. Filter by color.
@@ -31,6 +35,7 @@ public class ProductListPage extends BasePage {
     /* Merr sibling e pare. Mund te mos punoj per shkak se nuk eshte selector i sakte. Konsiderim per XPath.
      * Mund te perdoret dhe klasa "configurable-swatch-list" ama ne raste te vecanta mund te ndodhen disa swatch ne sidepanel.
      */
+    // #TODO: selector me i sakte ne baze te subquery: https://developer.mozilla.org/en-US/docs/Web/CSS/Next-sibling_combinator
     public By filterColorLocator = By.cssSelector("+ dd > ol.configurable-swatch-list li");
 
     /* Marrim swatch dhe elementin e pare te ngjyres
@@ -43,15 +48,20 @@ public class ProductListPage extends BasePage {
     public By filterPriceLocator = By.cssSelector("ol > li > a");
     public By sortControl = By.cssSelector("div.sort-by select[title=\"Sort By\"]");
 
-    public ProductListPage(WebDriver driver) {
+    public ProductListPage(WebDriver driver, boolean useGet) {
         super(driver);
         String[] strings = driver.getCurrentUrl().split(new StringBuffer(this.baseUrl).insert(0,'^').toString());
         this.subpath = strings[strings.length-1]; // Marrim elementin e fundit gjithmone (eleminojme OutofBounds)
-        //this.driver.get(this.baseUrl + this.subpath);
+        if(useGet)
+            this.driver.get(this.baseUrl + this.subpath);
     }
 
     public List<WebElement> getProductList() {
         return this.getWebElements(productLocator);
+    }
+
+    public int getProductCount() {
+        return this.getProductList().size();
     }
 
     public WebElement getProduct() {
@@ -140,12 +150,12 @@ public class ProductListPage extends BasePage {
         return true;
     }
 
-    /*
+    /**
      * Filtrojme sipas ngjyres se zeze:
      * 1. Gjejme elmentin Header te color dhe marrim tabelen e ngjyrave
      * 2. Zgjedhim ngjyren e pare (te zezen).
      */
-    public void filterByColor(){
+    public ProductListPage filterByColor(){
         List<WebElement> filters = this.getWebElements(filterPanelLocator);
         WebElement colorFilterElement = null;
         for (WebElement filter : filters) {
@@ -153,20 +163,20 @@ public class ProductListPage extends BasePage {
                 colorFilterElement = filter;
         }
         if(colorFilterElement == null) {
-            return;
+            return this;
         }
         else {
             List<WebElement> colors = this.getWebElements(filterColorLocator, colorFilterElement);
             this.click(this.getWebElement(By.cssSelector("a"), colors.get(0)));
         }
+        return this;
     }
 
     /*
      * TC 5. Color filtering check.
      */
     public boolean checkSelectedColor(){
-        boolean classCheck = false;
-        boolean styleCheck = false;
+        boolean classCheck, styleCheck;
         for(WebElement product : this.getProductList()) {
             WebElement blackSwatchElement = this.getWebElement(blackColorSwatchLocator, product);
             classCheck = blackSwatchElement.getDomAttribute("class").contains("selected");
@@ -177,6 +187,9 @@ public class ProductListPage extends BasePage {
         return true;
     }
 
+    /**
+     * Filtro sipas groupit te cmimit. Default zgjedh grupin e pare (0..99).
+     */
     public void filterByPrice(){
         List<WebElement> filters = this.getWebElements(filterPanelLocator);
         WebElement priceFilterElement = null;
@@ -225,8 +238,31 @@ public class ProductListPage extends BasePage {
         return true;
     }
 
-    public void setPriceSorting() {
+    public ProductListPage setPriceSorting() {
        new Select(this.getWebElement(sortControl)).selectByVisibleText("Price");
+       return this;
+    }
+
+    public ProductListPage addToWishlist(int index) {
+        WebElement product;
+        if(index < this.getProductList().size() && index > 0){
+            product = this.getProductList().get(index);
+            this.click(this.getWebElement(productAddToWishlistLocator, product));
+        }
+        return this;
+    }
+
+    /**
+     * Shtim ne wishlist dergon ne UserAccountPage -> Pas cdo OP kthehemi mbrapa.
+     */
+    public ProductListPage addFirstNToWishlist(int n) {
+        if(this.getProductList().size() >= n && n > 0){
+            for(int index = 0; index < n; index++){
+                this.addToWishlist(index);
+                this.goBack(); //this.goToHomePage().goToWomenProductList().setPriceSorting();
+            }
+        }
+        return this;
     }
 
     public boolean hoverProductStyleChange() {

@@ -13,10 +13,12 @@ public class LoginPage extends BasePage {
     public By interactionSubmitButton = new ByChained(interactionButtons, By.cssSelector("button[type=\"submit\"]"));
     public By errorMsgLocator = By.cssSelector("li.error-msg");
 
-    public LoginPage(WebDriver driver) {
+    public LoginPage(WebDriver driver, boolean useGet) {
         super(driver);
         this.subpath = "customer/account/login/";
-        this.driver.get(this.baseUrl + this.subpath);
+        if(useGet) {
+            this.driver.get(this.baseUrl + this.subpath);
+        }
     }
 
     public boolean errorMsgVisible() {
