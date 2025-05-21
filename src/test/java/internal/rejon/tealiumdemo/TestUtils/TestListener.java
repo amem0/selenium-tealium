@@ -23,9 +23,9 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         ITestListener.super.onTestFailure(result);
-        String failureTime = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);
+        String failureTime = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss-SS")); // Timestamp ka ':', nuk lejohet ne NTFS
         String testName = result.getMethod().getMethodName();
-        String fileName = new StringBuilder(testName).append('-').append(failureTime).toString();
+        String fileName = new StringBuilder(testName).append('-').append(failureTime).append(".png").toString();
         File srcFile = ((TakesScreenshot) SeleniumDriver.driver).getScreenshotAs(OutputType.FILE);
         File dstFile = new File(fileName);
         try{
