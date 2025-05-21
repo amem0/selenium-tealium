@@ -1,5 +1,6 @@
 package internal.rejon.tealiumdemo.Pages;
 
+import internal.rejon.tealiumdemo.SeleniumDriver;
 import internal.rejon.tealiumdemo.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -126,7 +127,9 @@ public class ShoppingCartPage extends BasePage {
         super(driver);
         this.driver = driver;
         this.subpath = "checkout/cart/";
-        if(useGet)
+        if(useGet) {
             this.driver.get(this.baseUrl + this.subpath);
+            SeleniumDriver.setConsentCookie();
+        }
     }
 }

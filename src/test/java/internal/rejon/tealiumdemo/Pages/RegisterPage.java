@@ -1,6 +1,7 @@
 package internal.rejon.tealiumdemo.Pages;
 
 import internal.rejon.tealiumdemo.MockUserData;
+import internal.rejon.tealiumdemo.SeleniumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ByChained;
@@ -18,10 +19,13 @@ public class RegisterPage extends BasePage {
     public By interactionBackButton = new ByChained(interactionButtons, By.cssSelector("a.back-link"));
     public By interactionSubmitButton = new ByChained(interactionButtons, By.cssSelector("button[type=\"submit\"]"));
 
-    public RegisterPage(WebDriver driver) {
+    public RegisterPage(WebDriver driver, boolean useGet) {
         super(driver);
         this.subpath = "customer/account/create/";
-        this.driver.get(this.baseUrl + this.subpath);
+        if(useGet) {
+            this.driver.get(this.baseUrl + this.subpath);
+            SeleniumDriver.setConsentCookie();
+        }
     }
 
     public RegisterPage inputFirstName(MockUserData userData) {

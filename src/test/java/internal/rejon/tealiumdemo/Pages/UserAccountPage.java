@@ -1,5 +1,6 @@
 package internal.rejon.tealiumdemo.Pages;
 
+import internal.rejon.tealiumdemo.SeleniumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ByChained;
@@ -27,6 +28,7 @@ public class UserAccountPage extends BasePage {
         this.subpath="customer/account/index/";
         if (useGet) {
             this.driver.get(this.baseUrl + this.subpath);
+            SeleniumDriver.setConsentCookie();
         }
     }
 

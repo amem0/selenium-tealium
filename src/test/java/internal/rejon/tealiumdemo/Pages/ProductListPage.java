@@ -1,5 +1,6 @@
 package internal.rejon.tealiumdemo.Pages;
 
+import internal.rejon.tealiumdemo.SeleniumDriver;
 import internal.rejon.tealiumdemo.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -52,8 +53,10 @@ public class ProductListPage extends BasePage {
         super(driver);
         String[] strings = driver.getCurrentUrl().split(new StringBuffer(this.baseUrl).insert(0,'^').toString());
         this.subpath = strings[strings.length-1]; // Marrim elementin e fundit gjithmone (eleminojme OutofBounds)
-        if(useGet)
+        if(useGet) {
             this.driver.get(this.baseUrl + this.subpath);
+            SeleniumDriver.setConsentCookie();
+        }
     }
 
     public List<WebElement> getProductList() {

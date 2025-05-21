@@ -1,6 +1,7 @@
 package internal.rejon.tealiumdemo.Pages;
 
 import internal.rejon.tealiumdemo.MockUserData;
+import internal.rejon.tealiumdemo.SeleniumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ByChained;
@@ -16,8 +17,10 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver, boolean useGet) {
         super(driver);
-        if (useGet)
+        if (useGet) {
             this.driver.get(this.baseUrl);
+            SeleniumDriver.setConsentCookie();
+        }
     }
 
     public ProductListPage goToWomenProductList() {

@@ -92,7 +92,7 @@ public class BasePage {
 
     public RegisterPage goToRegisterPage() {
         this.navigate(accountListLocator, accountRegisterLocator, true);
-        return new RegisterPage(this.driver);
+        return new RegisterPage(this.driver, false);
     }
 
     public HomePage LogOut() {

@@ -1,6 +1,7 @@
 package internal.rejon.tealiumdemo.Pages;
 
 import internal.rejon.tealiumdemo.MockUserData;
+import internal.rejon.tealiumdemo.SeleniumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ByChained;
@@ -18,6 +19,7 @@ public class LoginPage extends BasePage {
         this.subpath = "customer/account/login/";
         if(useGet) {
             this.driver.get(this.baseUrl + this.subpath);
+            SeleniumDriver.setConsentCookie();
         }
     }
 

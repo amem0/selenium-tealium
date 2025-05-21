@@ -23,8 +23,9 @@ public class SeleniumDriver {
     public static void createDriver(String browserType) {
         switch(browserType.toUpperCase()) {
             case "FIREFOX":
-                driver = new FirefoxDriver((FirefoxOptions) new FirefoxOptions().setBrowserVersion("nightly")
-                        .addArguments("-headless"));
+                //driver = new FirefoxDriver((FirefoxOptions) new FirefoxOptions().setBrowserVersion("nightly")
+                //        .addArguments("-headless"));
+                driver = new FirefoxDriver((FirefoxOptions) new FirefoxOptions().setBrowserVersion("nightly"));
                 break;
             case "CHROME":
                 driver = new ChromeDriver((ChromeOptions) new ChromeOptions().setBrowserVersion("canary"));
@@ -33,13 +34,15 @@ public class SeleniumDriver {
                 driver = new ChromeDriver();
                 break;
         }
-        setConsentCookie();
     }
 
     public static void setConsentCookie(){
         try{
-            driver.manage().addCookie(new Cookie(PropertyParsing.getProperties().getProperty("privacyConsentCookieKey"),
-                    PropertyParsing.getProperties().getProperty("privacyConsentCookieValue")));
+            if(driver.manage().getCookieNamed(PropertyParsing.getProperties().getProperty("privacyConsentCookieKey")) == null
+             && driver.getCurrentUrl() != null
+            )
+                driver.manage().addCookie(new Cookie(PropertyParsing.getProperties().getProperty("privacyConsentCookieKey"),
+                        PropertyParsing.getProperties().getProperty("privacyConsentCookieValue")));
         }
         catch (IOException e) {}
     }
