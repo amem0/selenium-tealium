@@ -10,7 +10,7 @@ public class LoginPage extends BasePage {
     public By emailAddressLocator = By.cssSelector("div.input-box > input#email[name=\"login[username]\"]");
     public By passwordLocator = By.cssSelector("div.input-box > input#pass[name=\"login[password]\"]");
     public By rememberMeLocator = By.cssSelector("div.input-box > input.checkbox[name=\"persistent_remember_me\"]");
-    public By interactionButtons = By.cssSelector("div.button-set");
+    public By interactionButtons = By.cssSelector("div.buttons-set");
     public By interactionSubmitButton = new ByChained(interactionButtons, By.cssSelector("button[type=\"submit\"]"));
     public By errorMsgLocator = By.cssSelector("li.error-msg");
 

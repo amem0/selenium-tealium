@@ -13,7 +13,7 @@ public class TC07_ShoppingCartTest extends BaseTest {
     /**
      *
      */
-    @Test
+    @Test(dependsOnGroups = {"ProductSorting"}, groups = {"ShoppingCart"})
     public void ShoppingCartTest() {
         this.LoginPreReq();
         HomePage homePage = new HomePage(driver, true);

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ProductListPage extends BasePage {
 
-    public By productLocator = By.cssSelector("ul.product-grid > li.item");
+    public By productLocator = By.cssSelector("ul.products-grid > li.item");
     public By productImageLocator = By.cssSelector("a.product-image > img");
     public By productInfoNameLocator = By.cssSelector("div.product-info h2.product-name");
     public By productPriceBoxLocator = By.cssSelector("div.product-info div.price-box");
@@ -51,8 +51,8 @@ public class ProductListPage extends BasePage {
 
     public ProductListPage(WebDriver driver, boolean useGet) {
         super(driver);
-        String[] strings = driver.getCurrentUrl().split(new StringBuffer(this.baseUrl).insert(0,'^').toString());
-        this.subpath = strings[strings.length-1]; // Marrim elementin e fundit gjithmone (eleminojme OutofBounds)
+        //String[] strings = driver.getCurrentUrl().split(new StringBuffer(this.baseUrl).insert(0,'^').toString());
+        //this.subpath = strings[strings.length-1]; // Marrim elementin e fundit gjithmone (eleminojme OutofBounds)
         if(useGet) {
             this.driver.get(this.baseUrl + this.subpath);
             SeleniumDriver.setConsentCookie();

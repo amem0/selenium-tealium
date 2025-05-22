@@ -119,19 +119,27 @@ public class BasePage {
     }
 
     public WebElement getWebElement(By locator) {
-        return this.driver.findElement(locator);
+        if(this.isDisplayed(locator))
+            return this.driver.findElement(locator);
+        return null;
     }
 
     public WebElement getWebElement(By locator, WebElement rootElement) {
-        return rootElement.findElement(locator);
+        if(this.isDisplayed(locator))
+            return rootElement.findElement(locator);
+        return null;
     }
 
     public List<WebElement> getWebElements(By locator) {
-        return this.driver.findElements(locator);
+        if(this.isDisplayed(locator))
+            return this.driver.findElements(locator);
+        return null;
     }
 
     public List<WebElement> getWebElements(By locator, WebElement rootElement) {
-        return rootElement.findElements(locator);
+        if(this.isDisplayed(locator))
+            return rootElement.findElements(locator);
+        return null;
     }
 
     public void goBack() {

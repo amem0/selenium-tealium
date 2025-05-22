@@ -13,7 +13,7 @@ public class TC08_EmptyShoppingCart extends BaseTest {
      * Assert 1: Per cdo heqje verifikim numri.
      * Assert 2: Shopping Cart empty, verifikim nga ekzistenca e elementit.
      */
-    @Test
+    @Test(dependsOnGroups = {"ShoppingCart"}, groups = {"EmptyShoppingCart"})
     public void EmptyShoppingCart() {
         this.LoginPreReq();
         ShoppingCartPage shoppingCartPage = new HomePage(driver,true).goToShoppingCart();
