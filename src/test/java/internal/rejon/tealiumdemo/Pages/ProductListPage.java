@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ProductListPage extends BasePage {
 
-    public By productLocator = By.cssSelector("ul.products-grid > li.item");
+    public By productLocator = By.cssSelector("div.category-products ul.products-grid > li.item");
     public By productImageLocator = By.cssSelector("a.product-image > img");
     public By productInfoNameLocator = By.cssSelector("div.product-info h2.product-name");
     public By productPriceBoxLocator = By.cssSelector("div.product-info div.price-box");
@@ -122,9 +122,10 @@ public class ProductListPage extends BasePage {
      */
     public boolean specialPriceStyleCheck(WebElement rootElement) {
         WebElement specialPrice = this.getWebElement(productSpecialPriceLocator, rootElement).findElement(productPriceValueLocator);
-        boolean strikethrough = specialPrice.getCssValue("text-decoration-line").isEmpty();
+        // nullable?
+        boolean notStrikethrough = specialPrice.getCssValue("text-decoration-line").equals("none");
         boolean color = specialPrice.getCssValue("text-decoration-color").equals(StyleGuidelines.PriceStyle.specialPriceColor);
-        return strikethrough && color;
+        return notStrikethrough && color;
     }
 
     public boolean swatchStyleCheck(WebElement rootElement) {
@@ -146,11 +147,11 @@ public class ProductListPage extends BasePage {
     public boolean checkSalePrices() {
         for (WebElement product : this.getProductList()) {
             this.scroll2ElementJS(product);
-            if(!multiplePricesCheck(product) || !oldPriceStyleCheck(product) || !specialPriceStyleCheck(product)){
-                return false;
+            if(multiplePricesCheck(product) && oldPriceStyleCheck(product) && specialPriceStyleCheck(product)){
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
