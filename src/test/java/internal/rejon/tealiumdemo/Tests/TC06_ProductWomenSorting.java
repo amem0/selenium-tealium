@@ -15,7 +15,7 @@ public class TC06_ProductWomenSorting extends BaseTest {
      * Assert 1: Verifikojme sorting (Ascending)
      * Assert 2: Verifikojme numrin e produkteve ne wishlist nga Header.
      */
-    @Test(groups = {"ProductSorting"}, alwaysRun = false)
+    @Test(groups = {"ProductSorting"})
     public void ProductWomenSortingTest() {
         this.LoginPreReq();
         HomePage homePage = new HomePage(driver, true);

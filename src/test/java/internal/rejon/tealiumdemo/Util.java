@@ -8,16 +8,16 @@ public class Util {
         ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
     }
 
-    final static Pattern pricePattern = Pattern.compile("\"(\\d+\\.\\d+)|(\\d+)\"g");
-    final static Pattern itemCountPattern = Pattern.compile("\"(\\d+)\"g");
+    final static Pattern pricePattern = Pattern.compile("(\\d+\\.\\d+)|(\\d+)");
+    final static Pattern itemCountPattern = Pattern.compile("(\\d+)");
 
     /**
      * @param priceString, String to be parsed
      * @return price, double.
-     * Match i pare qe qe eshte numer dhjetor ose jo kapet. Match te tjere injorohen
+     * Punojme mbi match e pare. Ka probleme matching edhe pse pattern eshte i sakte???
      */
     public static double priceString2Int(String priceString) {
-        Matcher matchPrice = pricePattern.matcher(priceString);
+        Matcher matchPrice = pricePattern.matcher(priceString); //???
         return (double) Double.parseDouble(matchPrice.group());
     }
 

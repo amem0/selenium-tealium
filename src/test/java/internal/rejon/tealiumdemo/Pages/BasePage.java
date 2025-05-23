@@ -81,22 +81,22 @@ public class BasePage {
     }
 
     public ShoppingCartPage goToShoppingCart() {
-        this.navigate(accountListLocator, accountCartLocator, true);
+        this.navigate(accountLocator, accountCartLocator, true);
         return new ShoppingCartPage(this.driver, false);
     }
 
     public WishlistPage goToWishlistPage() {
-        this.navigate(accountListLocator, accountWhishlistLocator, true);
+        this.navigate(accountLocator, accountWhishlistLocator, true);
         return new WishlistPage(this.driver, false);
     }
 
     public RegisterPage goToRegisterPage() {
-        this.navigate(accountListLocator, accountRegisterLocator, true);
+        this.navigate(accountLocator, accountRegisterLocator, true);
         return new RegisterPage(this.driver, false);
     }
 
     public HomePage LogOut() {
-        this.navigate(accountListLocator, accountLogIOLocator, true);
+        this.navigate(accountLocator, accountLogIOLocator, true);
         return new HomePage(driver, false);
     }
 

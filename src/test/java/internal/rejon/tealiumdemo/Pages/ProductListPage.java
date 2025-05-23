@@ -20,7 +20,10 @@ public class ProductListPage extends BasePage {
     public By productPriceBoxLocator = By.cssSelector("div.product-info div.price-box");
     public By productActionsLocator = By.cssSelector("div.product-info div.actions");
     public By productPricesLocator = By.cssSelector("div.product-info div.price-box p");
-    public By productRegularPriceLocator = new ByChained(productPricesLocator, By.cssSelector("span.regular-price > span.price"));
+    // Konsiderojme vetem cmimet normale (elementi i fundit).
+    //public By productPriceLocator = By.cssSelector("div.product-info div.price-box p:last-child");
+    // Problem me special price Box qe ndodhet ne "women.html"
+    public By productRegularPriceLocator = new ByChained(productPriceBoxLocator, By.cssSelector("span.price"));
     public By productOldPriceLocator = new ByChained(productPriceBoxLocator, By.cssSelector("p.old-price"));
     public By productSpecialPriceLocator = new ByChained(productPriceBoxLocator, By.cssSelector("p.special-price"));
     public By productPriceValueLocator = By.cssSelector("span.price");
@@ -211,7 +214,7 @@ public class ProductListPage extends BasePage {
     }
 
     public double getProductPrice(WebElement rootElement) {
-       return Util.priceString2Int(this.getWebElement(productRegularPriceLocator, rootElement).getText());
+       return Util.priceString2Int(this.getWebElements(productRegularPriceLocator, rootElement).getLast().getText());
     }
 
     /*
