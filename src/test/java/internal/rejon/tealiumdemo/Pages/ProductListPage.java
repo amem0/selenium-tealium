@@ -16,7 +16,7 @@ public class ProductListPage extends BasePage {
 
     public By productLocator = By.cssSelector("div.category-products ul.products-grid > li.item");
     public By productImageLocator = By.cssSelector("a.product-image > img");
-    public By productInfoNameLocator = By.cssSelector("div.product-info h2.product-name");
+    public By productInfoNameLocator = By.cssSelector("div.product-info h2.product-name > a");
     public By productPriceBoxLocator = By.cssSelector("div.product-info div.price-box");
     public By productActionsLocator = By.cssSelector("div.product-info div.actions");
     public By productPricesLocator = By.cssSelector("div.product-info div.price-box p");

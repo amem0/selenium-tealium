@@ -22,6 +22,12 @@ public class MockUserData {
         this.signUp4Newsletter = signUp4Newsletter;
         this.rememberMe = rememberMe;
     }
+
+    public MockUserData(String email, String password){
+        this.emailAddress = email;
+        this.password = password;
+    }
+
     public String getFullNameUpper(){
         return new StringBuilder(firstName.toUpperCase()).append(" ")
                 .append(middleName.toUpperCase()).append(" ")

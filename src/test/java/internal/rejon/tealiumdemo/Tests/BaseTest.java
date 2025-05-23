@@ -18,7 +18,7 @@ public class BaseTest {
      * Login me kredencialet default. Mund te perdoret si PreRequisite per te gjithe TC
      */
     public void LoginPreReq() {
-        MockUserData mockUser = new MockUserData();
+        MockUserData mockUser = new MockUserData("aabbcc@example.org", "password");
         HomePage homePage = new HomePage(driver, true);
         LoginPage loginPage = homePage.goToLoginPage();
         loginPage.inputEmail(mockUser)

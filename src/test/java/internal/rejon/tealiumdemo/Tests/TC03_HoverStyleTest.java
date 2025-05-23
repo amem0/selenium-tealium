@@ -17,7 +17,7 @@ public class TC03_HoverStyleTest extends  BaseTest {
      */
     @Test
     public void HoverStyleTest() {
-        //this.LoginPreReq();
+        this.LoginPreReq();
         HomePage homePage = new HomePage(driver, true);
         ProductListPage productListPage = homePage.goToWomenProductList();
         Assert.assertTrue(productListPage.hoverProductStyleChange());

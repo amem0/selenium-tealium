@@ -15,7 +15,7 @@ public class TC04_SaleProductStyle extends BaseTest {
      */
     @Test
     public void CheckSalePriceStyle() {
-        //this.LoginPreReq();
+        this.LoginPreReq();
         HomePage homePage = new HomePage(driver, true);
         ProductListPage productListPage = homePage.goToSaleProductList();
         Assert.assertTrue(productListPage.checkSalePrices());
